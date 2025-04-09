@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/show_provider.dart';
+import '../providers/theme_provider.dart';
 import '../screens/detail_screen.dart';
 import '../widgets/show_tile.dart';
 
@@ -34,22 +35,33 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<ShowProvider>(context);
+    final showProvider = Provider.of<ShowProvider>(context);
+    final themeProvider = Provider.of<ThemeProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Séries TV'),
+        actions: [
+          IconButton(
+            icon: Icon(themeProvider.isDarkMode
+                ? Icons.light_mode
+                : Icons.dark_mode),
+            onPressed: () {
+              themeProvider.toggleTheme();
+            },
+          ),
+        ],
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(48),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             child: TextField(
-              onChanged: provider.setSearchQuery,
+              onChanged: showProvider.setSearchQuery,
               decoration: InputDecoration(
                 hintText: 'Rechercher une série...',
                 prefixIcon: Icon(Icons.search),
                 filled: true,
-                fillColor: Colors.white,
+                fillColor: Theme.of(context).cardColor,
                 contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -59,16 +71,17 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: provider.isLoading && provider.shows.isEmpty
+      body: showProvider.isLoading && showProvider.shows.isEmpty
           ? Center(child: CircularProgressIndicator())
-          : provider.shows.isEmpty
+          : showProvider.shows.isEmpty
           ? Center(child: Text('Aucune série trouvée.'))
           : ListView.builder(
         controller: _scrollController,
-        itemCount: provider.shows.length + (provider.hasMore ? 1 : 0),
+        itemCount: showProvider.shows.length +
+            (showProvider.hasMore ? 1 : 0),
         itemBuilder: (context, index) {
-          if (index < provider.shows.length) {
-            final show = provider.shows[index];
+          if (index < showProvider.shows.length) {
+            final show = showProvider.shows[index];
             return ShowTile(
               show: show,
               onTap: () {
