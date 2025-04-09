@@ -34,5 +34,5 @@ Une application mobile Flutter permettant de découvrir des séries TV populaire
 
 ### 2. Cloner le projet
 ```bash
-git clone https://github.com/votre-utilisateur/tv_shows_app.git
+git clone https://github.com/iliancode/tv_shows_app.git
 cd tv_shows_app
