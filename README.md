@@ -1,16 +1,38 @@
-# tvshows
+# 📺 Application Flutter - TV Shows
 
-A new Flutter project.
+Une application mobile Flutter permettant de découvrir des séries TV populaires, rechercher des séries, et consulter leurs détails. Les données sont récupérées dynamiquement depuis l'API publique de [Episodate](https://www.episodate.com/).
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🚀 Fonctionnalités principales
 
-A few resources to get you started if this is your first Flutter project:
+- 🔥 Liste des séries TV populaires
+- 🔎 Barre de recherche pour trouver des séries
+- 📄 Affichage des détails d'une série (image, nom, description)
+- 🔁 Chargement infini ("infinite scroll") des résultats
+- ⚡ Navigation entre les écrans
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🛠️ Technologies utilisées
+
+- **Flutter** : Framework mobile principal
+- **HTTP** : Pour les requêtes API REST
+- **Provider** & **ChangeNotifier** : Gestion d'état globale
+- **API Episodate** :
+    - `https://www.episodate.com/api/most-popular?page=:page`
+    - `https://www.episodate.com/api/search?q=:name&page=:page`
+    - `https://www.episodate.com/api/show-details?q=:id`
+
+---
+
+## 📦 Installation du projet
+
+### 1. Prérequis
+- Flutter installé : [Flutter Installation Guide](https://docs.flutter.dev/get-started/install)
+- Un IDE comme VS Code ou Android Studio
+
+### 2. Cloner le projet
+```bash
+git clone https://github.com/votre-utilisateur/tv_shows_app.git
+cd tv_shows_app
