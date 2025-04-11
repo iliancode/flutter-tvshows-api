@@ -1,5 +1,10 @@
 # 📺 Application Flutter - TV Shows
 
+# Equipe
+Yanis HLALI
+Ilian BENAISSA
+Sefa GUCLU
+
 Une application mobile Flutter permettant de découvrir des séries TV populaires, rechercher des séries, et consulter leurs détails. Les données sont récupérées dynamiquement depuis l'API publique de [Episodate](https://www.episodate.com/).
 
 ---
