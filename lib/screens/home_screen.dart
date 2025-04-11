@@ -75,10 +75,17 @@ class _HomeScreenState extends State<HomeScreen> {
           ? Center(child: CircularProgressIndicator())
           : showProvider.shows.isEmpty
           ? Center(child: Text('Aucune série trouvée.'))
-          : ListView.builder(
+          : GridView.builder(
         controller: _scrollController,
-        itemCount: showProvider.shows.length +
-            (showProvider.hasMore ? 1 : 0),
+        padding: const EdgeInsets.all(12),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
+          childAspectRatio: 2 / 3,
+        ),
+        itemCount:
+        showProvider.shows.length + (showProvider.hasMore ? 1 : 0),
         itemBuilder: (context, index) {
           if (index < showProvider.shows.length) {
             final show = showProvider.shows[index];
@@ -95,10 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           } else {
             return Center(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: CircularProgressIndicator(),
-              ),
+              child: CircularProgressIndicator(),
             );
           }
         },

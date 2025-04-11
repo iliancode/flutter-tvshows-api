@@ -12,8 +12,11 @@ class DetailScreen extends StatelessWidget {
     return FutureBuilder<Show>(
       future: ApiService.fetchShowDetails(showId),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) return Center(child: CircularProgressIndicator());
-        if (!snapshot.hasData) return Center(child: Text('Erreur de chargement'));
+        if (snapshot.connectionState == ConnectionState.waiting)
+          return Scaffold(body: Center(child: CircularProgressIndicator()));
+
+        if (!snapshot.hasData)
+          return Scaffold(body: Center(child: Text('Erreur de chargement')));
 
         final show = snapshot.data!;
         return Scaffold(
@@ -21,10 +24,24 @@ class DetailScreen extends StatelessWidget {
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(16.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.network(show.image),
-                SizedBox(height: 16),
-                Text(show.description, style: TextStyle(fontSize: 16)),
+                Hero(
+                  tag: 'show_${show.id}',
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.network(
+                      show.image,
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  show.description,
+                  style: TextStyle(fontSize: 16),
+                ),
               ],
             ),
           ),
